@@ -1,86 +1,106 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="public/style.css">
-    </head>
-    <body>
-        <section>
-            <div class="grid">
-                <div class="grid-row">
-                    <div class="image-container">
-                        <img class="grayscale" id="googlereview" src="images/googlereview.png" width="80" height="80">
-                    </div>
-                    <div class="check-container hide" id="googlereviewcheck">
-                        <img class="checkicon" src="images/checkicon.png">
-                    </div>
-                    <p><a href="https://g.page/r/CQJM3OGGTRuFEBM/review" target="_blank" class="fill-div" onclick="giveColor('googlereview');"><span>Leave a review on Google</span></a></p>
-                </div>
-                <div class="grid-row">
-                    <div class="image-container">
-                        <img class="grayscale" id="youtube" src="images/youtube.png" width="80" height="80">
-                    </div>
-                    <div class="check-container hide" id="youtubecheck">
-                        <img class="checkicon" src="images/checkicon.png">
-                    </div>
-                    <p><a href="https://www.youtube.com/c/smarterGermanBerlin?sub_confirmation=1" target="_blank" class="fill-div" onclick="giveColor('youtube');"><span>Subscribe to SG on YouTube</span></a></p>
-                </div>
-                <div class="grid-row">
-                    <div class="image-container">
-                        <img class="grayscale" id="others" src="images/others.png" width="80" height="80">
-                    </div>
-                    <div class="check-container hide" id="otherscheck">
-                        <img class="checkicon" src="images/checkicon.png">
-                    </div>
-                    <p><a href="https://smartergerman.com/courses/" target="_blank" class="fill-div" onclick="giveColor('others');"><span>Explore our special courses</span></a></p>
-                </div>
-                <div class="grid-row">
-                    <div class="image-container">
-                        <img class="grayscale" id="exampreparation" src="images/exampreparation_icon.png" width="80" height="80">
-                    </div>
-                    <div class="check-container hide" id="exampreparationcheck">
-                        <img class="checkicon"  src="images/checkicon.png">
-                    </div>
-                    <p><a href="https://www.italki.com/en/affshare?ref=affbettergerman" target="_blank" class="fill-div" onclick="giveColor('exampreparation');"><span>Oral Exam Preparation - iTalki</span></a></p>
-                </div>
-                <div class="grid-row">
-                    <div class="image-container">
-                        <img class="grayscale" src="images/fwb.png" alt="" id="fwb">
-                    </div>
-                    <div class="check-container hide" id="fwbcheck">
-                        <img src="images/checkicon.png" class="checkicon">
-                    </div>
-                    <p><a href="https://sso.teachable.com/secure/263787/current_user/refer_a_friend" target="_blank" class="fill-div" onclick="giveColor('fwb');"><span>Friends with benefits</span></a></p>
-                </div>
-                <div class="grid-row">
-    <div class="image-container">
-        <img class="grayscale" id="supportmember_9" src="images/Donate_9.png" width="80" height="80">
-    </div>
-    <div class="check-container hide" id="supportmember_9check">
-        <img class="checkicon" src="images/checkicon.png">
-    </div>
-    <p>
-        <a href="https://smartergerman.com/free-german-online-courses/"
-           target="_blank"
-           class="fill-div"
-           onclick="giveColor('supportmember_9');">
-           <span>Core Support Membership</span>
-        </a>
-    </p>
-</div>
-                 <div class="grid-row">
-                    <div class="image-container">
-                        <img class="grayscale" id="supportmember_29" src="images/Donate_29.png" width="80" height="80">
-                    </div>
-                    <div class="check-container hide" id="supportmember_29check">
-                        <img class="checkicon" src="images/checkicon.png">
-                    </div>
-                    <p><a href="https://smartergerman.com/free-german-online-courses/" target="_blank" class="fill-div" onclick="giveColor('supportmember_29');"><span>Premium Support Membership</span></a></p>
-                </div>
-            </div>
-                </div>
-            </div>
-        </section>
-    </body>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="public/style.css">
+  </head>
+  <body>
+    <section>
+      <div class="grid">
+
+        <!-- 1) Google Review -->
+        <div class="grid-row">
+          <div class="image-container">
+            <img class="grayscale" id="googlereview" src="images/googlereview.png" width="80" height="80" alt="Google Review">
+          </div>
+          <div class="check-container hide" id="googlereviewcheck">
+            <img class="checkicon" src="images/checkicon.png" alt="Checked">
+          </div>
+          <p>
+            <a href="https://g.page/r/CQJM3OGGTRuFEBM/review" target="_blank" rel="noopener" class="fill-div" onclick="giveColor('googlereview');">
+              <span>Leave a review on Google</span>
+            </a>
+          </p>
+        </div>
+
+        <!-- 2) YouTube Subscribe -->
+        <div class="grid-row">
+          <div class="image-container">
+            <img class="grayscale" id="youtube" src="images/youtube.png" width="80" height="80" alt="YouTube">
+          </div>
+          <div class="check-container hide" id="youtubecheck">
+            <img class="checkicon" src="images/checkicon.png" alt="Checked">
+          </div>
+          <p>
+            <a href="https://www.youtube.com/c/smarterGermanBerlin?sub_confirmation=1" target="_blank" rel="noopener" class="fill-div" onclick="giveColor('youtube');">
+              <span>Subscribe to SG on YouTube</span>
+            </a>
+          </p>
+        </div>
+
+        <!-- 3) Easy Reader (replaces "Explore our special courses") -->
+        <div class="grid-row">
+          <div class="image-container">
+            <img class="grayscale" id="others" src="images/others.png" width="80" height="80" alt="Easy Reader">
+          </div>
+          <div class="check-container hide" id="otherscheck">
+            <img class="checkicon" src="images/checkicon.png" alt="Checked">
+          </div>
+          <p>
+            <a href="https://smartergerman.com/courses/easy-reader-german-b1-milk/" target="_blank" rel="noopener" class="fill-div" onclick="giveColor('others');">
+              <span>Get one of my Easy Readers</span>
+            </a>
+          </p>
+        </div>
+
+        <!-- 4) Oral Exam Preparation - iTalki -->
+        <div class="grid-row">
+          <div class="image-container">
+            <img class="grayscale" id="exampreparation" src="images/exampreparation_icon.png" width="80" height="80" alt="Oral Exam Preparation">
+          </div>
+          <div class="check-container hide" id="exampreparationcheck">
+            <img class="checkicon" src="images/checkicon.png" alt="Checked">
+          </div>
+          <p>
+            <a href="https://www.italki.com/en/affshare?ref=affbettergerman" target="_blank" rel="noopener" class="fill-div" onclick="giveColor('exampreparation');">
+              <span>Oral Exam Preparation – iTalki</span>
+            </a>
+          </p>
+        </div>
+
+        <!-- 5) Friends with benefits (refer-a-friend) -->
+        <div class="grid-row">
+          <div class="image-container">
+            <img class="grayscale" src="images/fwb.png" alt="Refer a Friend" id="fwb">
+          </div>
+          <div class="check-container hide" id="fwbcheck">
+            <img src="images/checkicon.png" class="checkicon" alt="Checked">
+          </div>
+          <p>
+            <a href="https://sso.teachable.com/secure/263787/current_user/refer_a_friend" target="_blank" rel="noopener" class="fill-div" onclick="giveColor('fwb');">
+              <span>Friends with benefits</span>
+            </a>
+          </p>
+        </div>
+
+        <!-- 6) Personal Support Membership (replaces Premium Support Membership) -->
+        <div class="grid-row">
+          <div class="image-container">
+            <img class="grayscale" id="supportmember_29" src="images/Donate_29.png" width="80" height="80" alt="Personal Support Membership">
+          </div>
+          <div class="check-container hide" id="supportmember_29check">
+            <img class="checkicon" src="images/checkicon.png" alt="Checked">
+          </div>
+          <p>
+            <a href="https://smartergerman.com/memberships/#member" target="_blank" rel="noopener" class="fill-div" onclick="giveColor('supportmember_29');">
+              <span>Personal Support Membership</span>
+            </a>
+          </p>
+        </div>
+
+      </div>
+    </section>
+
     <script src="public/script.js"></script>
+  </body>
 </html>
