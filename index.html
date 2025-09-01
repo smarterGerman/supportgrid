@@ -1,169 +1,188 @@
-<!-- File: support-sg.html -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Support SmarterGerman</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="public/style.css" />
+<head>
+  <meta charset="utf-8" />
+  <title>Support SmarterGerman</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="public/style.css" />
 
-    <!-- Minimal safety styles so this works even without external CSS -->
-    <style>
-      .grayscale { filter: grayscale(100%); }
-      .hide { display: none; }
-      .grid { display: grid; gap: 16px; }
-      .grid-row { display: grid; grid-template-columns: 80px 24px 1fr; align-items: center; gap: 12px; }
-      .image-container { width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; }
-      .check-container img.checkicon { width: 24px; height: 24px; }
-      p { margin: 0; }
-      a.fill-div { text-decoration: none; color: inherit; }
-      a.fill-div span { text-decoration: underline; }
-      .intro { max-width: 900px; margin: 0 auto 24px; line-height: 1.6; color: #374151; font-size: 1rem; }
-    </style>
-  </head>
-  <body>
-    <!-- Intro text block -->
-    <section class="intro">
-      <p>Dear SmarterGerman Learner,<br>
-      Your support means the world to me. Running a business is not as simple as just charging money, and your help makes a real difference. Below, you’ll find several ways you can contribute to improving my courses and keeping SmarterGerman alive and growing.<br>
-      Thank you from the bottom of my heart for being such an important part of this journey and for supporting my work.</p>
-    </section>
+  <!-- Safe CSS so layout works even if your stylesheet differs -->
+  <style>
+    :root {
+      --icon-size: 160px;   /* <= change this once if you ever switch sizes */
+      --check-size: 24px;
+      --gap: 12px;
+    }
+    .grayscale { filter: grayscale(100%); }
+    .hide { display: none; }
 
-    <section aria-label="Ways to support SmarterGerman">
-      <div class="grid">
+    .intro { max-width: 900px; margin: 0 auto 24px; line-height: 1.6; color: #374151; }
 
-        <!-- 1) Google Review -->
-        <div class="grid-row">
-          <div class="image-container">
-            <img class="grayscale" id="googlereview"
-                 src="images/googlereview.png" width="80" height="80"
-                 alt="Google Review">
-          </div>
-          <div class="check-container hide" id="googlereviewcheck">
-            <img class="checkicon" src="images/checkicon.png" alt="Checked">
-          </div>
-          <p>
-            <a href="https://g.page/r/CQJM3OGGTRuFEBM/review"
-               target="_blank" rel="noopener noreferrer"
-               class="fill-div" onclick="giveColor('googlereview');">
-              <span>Leave a review on Google</span>
-            </a>
-          </p>
+    .grid { display: grid; gap: 16px; }
+    .grid-row {
+      display: grid;
+      grid-template-columns: var(--icon-size) var(--check-size) 1fr; /* <- was 80px */
+      align-items: center;
+      gap: var(--gap);
+    }
+    .image-container {
+      width: var(--icon-size);   /* <- was 80px */
+      height: var(--icon-size);  /* <- was 80px */
+      display: flex; align-items: center; justify-content: center;
+    }
+    .image-container img {
+      width: 100%; height: 100%; object-fit: contain; display: block;
+    }
+    .check-container img.checkicon { width: var(--check-size); height: var(--check-size); display:block; }
+
+    p { margin: 0; }
+    a.fill-div { text-decoration: none; color: inherit; }
+    a.fill-div span { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- Intro -->
+  <section class="intro">
+    <p>Dear SmarterGerman Learner,<br>
+    Your support means the world to me. Running a business is not as simple as just charging money, and your help makes a real difference. Below, you’ll find several ways you can contribute to improving my courses and keeping SmarterGerman alive and growing.<br>
+    Thank you from the bottom of my heart for being such an important part of this journey and for supporting my work.</p>
+  </section>
+
+  <section aria-label="Ways to support SmarterGerman">
+    <div class="grid">
+
+      <!-- 1) Google Review -->
+      <div class="grid-row">
+        <div class="image-container">
+          <img class="grayscale" id="googlereview"
+               src="images/googlereview.png"
+               width="160" height="160" alt="Google Review">
         </div>
-
-        <!-- 2) YouTube Subscribe -->
-        <div class="grid-row">
-          <div class="image-container">
-            <img class="grayscale" id="youtube"
-                 src="images/youtube.png" width="80" height="80"
-                 alt="YouTube">
-          </div>
-          <div class="check-container hide" id="youtubecheck">
-            <img class="checkicon" src="images/checkicon.png" alt="Checked">
-          </div>
-          <p>
-            <a href="https://www.youtube.com/c/smarterGermanBerlin?sub_confirmation=1"
-               target="_blank" rel="noopener noreferrer"
-               class="fill-div" onclick="giveColor('youtube');">
-              <span>Subscribe to SG on YouTube</span>
-            </a>
-          </p>
+        <div class="check-container hide" id="googlereviewcheck">
+          <img class="checkicon" src="images/checkicon.png" alt="Checked">
         </div>
-
-        <!-- 3) Easy Reader -->
-        <div class="grid-row">
-          <div class="image-container">
-            <img class="grayscale" id="others"
-                 src="images/others.png" width="80" height="80"
-                 alt="Easy Reader">
-          </div>
-          <div class="check-container hide" id="otherscheck">
-            <img class="checkicon" src="images/checkicon.png" alt="Checked">
-          </div>
-          <p>
-            <a href="https://smartergerman.com/courses/easy-reader-german-b1-milk/"
-               target="_blank" rel="noopener noreferrer"
-               class="fill-div" onclick="giveColor('others');">
-              <span>Get one of my Easy Readers</span>
-            </a>
-          </p>
-        </div>
-
-        <!-- 4) Oral Exam Preparation – Deutschgym -->
-        <div class="grid-row">
-          <div class="image-container">
-            <img class="grayscale" id="exampreparation"
-                 src="images/exampreparation_icon.png" width="80" height="80"
-                 alt="Oral Exam Preparation">
-          </div>
-          <div class="check-container hide" id="exampreparationcheck">
-            <img class="checkicon" src="images/checkicon.png" alt="Checked">
-          </div>
-          <p>
-            <a href="https://deutschgym.com/?via=michael"
-               target="_blank" rel="noopener noreferrer"
-               class="fill-div" onclick="giveColor('exampreparation');">
-              <span>Oral Exam Preparation – Deutschgym</span>
-            </a>
-          </p>
-        </div>
-
-        <!-- 5) Friends with benefits (refer-a-friend) -->
-        <div class="grid-row">
-          <div class="image-container">
-            <img class="grayscale" id="fwb"
-                 src="images/fwb.png" width="80" height="80"
-                 alt="Refer a Friend">
-          </div>
-          <div class="check-container hide" id="fwbcheck">
-            <img class="checkicon" src="images/checkicon.png" alt="Checked">
-          </div>
-          <p>
-            <a href="https://sso.teachable.com/secure/263787/current_user/refer_a_friend"
-               target="_blank" rel="noopener noreferrer"
-               class="fill-div" onclick="giveColor('fwb');">
-              <span>Friends with benefits</span>
-            </a>
-          </p>
-        </div>
-
-        <!-- 6) Personal Support Membership (flat PNG icons) -->
-        <div class="grid-row">
-          <div class="image-container">
-            <img class="grayscale" id="supportmember_29"
-                 src="images/psg-icon-unused.png"
-                 data-used-src="images/psg-icon-used.png"
-                 width="80" height="80"
-                 alt="Personal Support Membership">
-          </div>
-          <div class="check-container hide" id="supportmember_29check">
-            <img class="checkicon" src="images/checkicon.png" alt="Checked">
-          </div>
-          <p>
-            <a href="https://smartergerman.com/memberships/#member"
-               target="_blank" rel="noopener noreferrer"
-               class="fill-div" onclick="giveColor('supportmember_29');">
-              <span>Personal Support Membership</span>
-            </a>
-          </p>
-        </div>
-
+        <p>
+          <a href="https://g.page/r/CQJM3OGGTRuFEBM/review"
+             target="_blank" rel="noopener"
+             class="fill-div" onclick="giveColor('googlereview');">
+            <span>Leave a review on Google</span>
+          </a>
+        </p>
       </div>
-    </section>
 
-    <script src="public/script.js"></script>
-    <script>
-      // Marks an item as "used": remove grayscale, swap icon to the "used" PNG, show checkmark.
-      function giveColor(id) {
-        var img = document.getElementById(id);
-        if (img) {
-          img.classList.remove('grayscale');
-          var usedSrc = img.getAttribute('data-used-src');
-          if (usedSrc) img.setAttribute('src', usedSrc);
-        }
-        var check = document.getElementById(id + 'check');
-        if (check) check.classList.remove('hide');
+      <!-- 2) YouTube Subscribe -->
+      <div class="grid-row">
+        <div class="image-container">
+          <img class="grayscale" id="youtube"
+               src="images/youtube.png"
+               width="160" height="160" alt="YouTube">
+        </div>
+        <div class="check-container hide" id="youtubecheck">
+          <img class="checkicon" src="images/checkicon.png" alt="Checked">
+        </div>
+        <p>
+          <a href="https://www.youtube.com/c/smarterGermanBerlin?sub_confirmation=1"
+             target="_blank" rel="noopener"
+             class="fill-div" onclick="giveColor('youtube');">
+            <span>Subscribe to SG on YouTube</span>
+          </a>
+        </p>
+      </div>
+
+      <!-- 3) Easy Reader -->
+      <div class="grid-row">
+        <div class="image-container">
+          <img class="grayscale" id="others"
+               src="images/others.png"
+               width="160" height="160" alt="Easy Reader">
+        </div>
+        <div class="check-container hide" id="otherscheck">
+          <img class="checkicon" src="images/checkicon.png" alt="Checked">
+        </div>
+        <p>
+          <a href="https://smartergerman.com/courses/easy-reader-german-b1-milk/"
+             target="_blank" rel="noopener"
+             class="fill-div" onclick="giveColor('others');">
+            <span>Get one of my Easy Readers</span>
+          </a>
+        </p>
+      </div>
+
+      <!-- 4) Oral Exam Preparation – Deutschgym -->
+      <div class="grid-row">
+        <div class="image-container">
+          <img class="grayscale" id="exampreparation"
+               src="images/exampreparation_icon.png"
+               width="160" height="160" alt="Oral Exam Preparation">
+        </div>
+        <div class="check-container hide" id="exampreparationcheck">
+          <img class="checkicon" src="images/checkicon.png" alt="Checked">
+        </div>
+        <p>
+          <a href="https://deutschgym.com/?via=michael"
+             target="_blank" rel="noopener"
+             class="fill-div" onclick="giveColor('exampreparation');">
+            <span>Oral Exam Preparation – Deutschgym</span>
+          </a>
+        </p>
+      </div>
+
+      <!-- 5) Friends with benefits (refer-a-friend) -->
+      <div class="grid-row">
+        <div class="image-container">
+          <img class="grayscale" id="fwb"
+               src="images/fwb.png"
+               width="160" height="160" alt="Refer a Friend">
+        </div>
+        <div class="check-container hide" id="fwbcheck">
+          <img class="checkicon" src="images/checkicon.png" alt="Checked">
+        </div>
+        <p>
+          <a href="https://sso.teachable.com/secure/263787/current_user/refer_a_friend"
+             target="_blank" rel="noopener"
+             class="fill-div" onclick="giveColor('fwb');">
+            <span>Friends with benefits</span>
+          </a>
+        </p>
+      </div>
+
+      <!-- 6) Personal Support Membership (flat PNGs 160x160) -->
+      <div class="grid-row">
+        <div class="image-container">
+          <img class="grayscale" id="supportmember_29"
+               src="images/psg-icon-inactive-160.png"              <!-- or psg-icon-unused.png if you renamed -->
+               data-used-src="images/psg-icon-active-160.png"      <!-- or psg-icon-used.png -->
+               width="160" height="160" alt="Personal Support Membership">
+        </div>
+        <div class="check-container hide" id="supportmember_29check">
+          <img class="checkicon" src="images/checkicon.png" alt="Checked">
+        </div>
+        <p>
+          <a href="https://smartergerman.com/memberships/#member"
+             target="_blank" rel="noopener"
+             class="fill-div" onclick="giveColor('supportmember_29');">
+            <span>Personal Support Membership</span>
+          </a>
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="public/script.js"></script>
+  <script>
+    // swap inactive -> active + show check
+    function giveColor(id) {
+      var img = document.getElementById(id);
+      if (img) {
+        img.classList.remove('grayscale');
+        var used = img.getAttribute('data-used-src');
+        if (used) img.src = used;
       }
-    </script>
-  </body>
+      var check = document.getElementById(id + 'check');
+      if (check) check.classList.remove('hide');
+    }
+  </script>
+</body>
 </html>
