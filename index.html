@@ -5,7 +5,21 @@
     <meta charset="utf-8" />
     <title>Support SmarterGerman</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Keep your existing stylesheet -->
     <link rel="stylesheet" href="public/style.css" />
+
+    <!-- Minimal safety styles so this works even without external CSS -->
+    <style>
+      .grayscale { filter: grayscale(100%); }
+      .hide { display: none; }
+      .grid { display: grid; gap: 16px; }
+      .grid-row { display: grid; grid-template-columns: 80px 24px 1fr; align-items: center; gap: 12px; }
+      .image-container { width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; }
+      .check-container img.checkicon { width: 24px; height: 24px; }
+      p { margin: 0; }
+      a.fill-div { text-decoration: none; color: inherit; }
+      a.fill-div span { text-decoration: underline; }
+    </style>
   </head>
   <body>
     <section>
@@ -106,12 +120,12 @@
           </p>
         </div>
 
-        <!-- 6) Personal Support Membership -->
+        <!-- 6) Personal Support Membership (NEW PNG icons) -->
         <div class="grid-row">
           <div class="image-container">
             <img class="grayscale" id="supportmember_29"
-                 src="images/psg-icon-unused.svg"
-                 data-used-src="images/psg-icon-used.svg"
+                 src="images/psg-icon-unused.png"
+                 data-used-src="images/psg-icon-used.png"
                  width="80" height="80"
                  alt="Personal Support Membership">
           </div>
@@ -130,21 +144,22 @@
       </div>
     </section>
 
-    <!-- Your existing site JS (keep if you need it) -->
+    <!-- Keep your existing site JS -->
     <script src="public/script.js"></script>
 
-    <!-- Minimal inline helper to ensure icon state swap works even without external JS -->
+    <!-- Inline helper ensures icon swap works even if script.js is empty -->
     <script>
-      window.giveColor = function (id) {
-        var el = document.getElementById(id);
-        if (el) {
-          el.classList.remove('grayscale');
-          var used = el.getAttribute('data-used-src');
-          if (used) el.setAttribute('src', used);
+      // Marks an item as "used": remove grayscale, swap icon to the "used" PNG, show checkmark.
+      function giveColor(id) {
+        var img = document.getElementById(id);
+        if (img) {
+          img.classList.remove('grayscale');
+          var usedSrc = img.getAttribute('data-used-src');
+          if (usedSrc) img.setAttribute('src', usedSrc);
         }
         var check = document.getElementById(id + 'check');
         if (check) check.classList.remove('hide');
-      };
+      }
     </script>
   </body>
 </html>
