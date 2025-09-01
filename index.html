@@ -1,194 +1,443 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <title>Support SmarterGerman</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="public/style.css" />
-
-  <!-- Namespaced, defensive CSS to prevent external overrides -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
   <style>
-    .sg-support { --icon-size: 160px; --check-size: 24px; --row-gap: 16px; --col-gap: 12px; }
-    .sg-support * { box-sizing: border-box; }
-
-    .sg-support .grayscale { filter: grayscale(100%); }
-    .sg-support .hide { display: none; }
-
-    .sg-support .intro { max-width: 900px; margin: 0 auto 24px; line-height: 1.6; color: #374151; }
-
-    .sg-support .grid { display: grid; gap: var(--row-gap); }
-
-    .sg-support .grid-row{
-      display: grid !important;
-      grid-template-columns: var(--icon-size) var(--check-size) 1fr !important;
-      align-items: center !important;
-      gap: var(--col-gap) !important;
-      position: static !important;
-      clear: both !important;
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-
-    /* Icon container + img: kill floats/absolute from global CSS */
-    .sg-support .image-container{
-      width: var(--icon-size) !important;
-      height: var(--icon-size) !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      position: static !important;
-      float: none !important;
-      margin: 0 !important;
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      line-height: 1.6;
+      color: #374151;
+      padding: 2rem 1rem;
+      background: #f9fafb;
+    }
+    
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    /* Intro section */
+    .intro {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .intro p {
+      color: #4b5563;
+      line-height: 1.7;
+    }
+    
+    /* Support grid */
+    .support-grid {
+      display: grid;
+      gap: 1rem;
+    }
+    
+    /* Support item */
+    .support-item {
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .support-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .support-link {
+      display: grid;
+      grid-template-columns: 80px 24px 1fr;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    /* Image container */
+    .image-container {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
       overflow: hidden;
-      border-radius: 50%;
+      background: #f3f4f6;
     }
-    .sg-support .image-container img{
-      width: 100% !important;
-      height: 100% !important;
-      max-width: none !important;
-      object-fit: contain !important;
-      display: block !important;
-      position: static !important;
-      inset: auto !important;
-      margin: 0 !important;
+    
+    .support-icon {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: filter 0.3s, opacity 0.3s;
     }
-
-    .sg-support .check-container img.checkicon{
-      width: var(--check-size);
-      height: var(--check-size);
-      display: block;
+    
+    .support-icon.grayscale {
+      filter: grayscale(100%);
+      opacity: 0.7;
     }
-
-    .sg-support p{ margin: 0; }
-    .sg-support a.fill-div{ color: inherit; text-decoration: none; display: inline-block; }
-    .sg-support a.fill-div span{ text-decoration: underline; }
+    
+    /* Fallback for missing images */
+    .support-icon:not([src]), 
+    .support-icon[src=""],
+    .support-icon:broken {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+    }
+    
+    .support-icon:not([src])::before,
+    .support-icon[src=""]::before {
+      content: attr(data-fallback);
+    }
+    
+    /* Check mark */
+    .check-container {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .check-container.show {
+      opacity: 1;
+    }
+    
+    .check-icon {
+      width: 24px;
+      height: 24px;
+    }
+    
+    /* Text content */
+    .support-text {
+      font-size: 1rem;
+      color: #1f2937;
+    }
+    
+    .support-link:hover .support-text {
+      color: #2563eb;
+      text-decoration: underline;
+    }
+    
+    /* Visited state */
+    .support-item.visited .support-icon {
+      filter: none;
+      opacity: 1;
+    }
+    
+    .support-item.visited .check-container {
+      opacity: 1;
+    }
+    
+    /* Responsive */
+    @media (max-width: 640px) {
+      .support-link {
+        grid-template-columns: 60px 20px 1fr;
+      }
+      
+      .image-container {
+        width: 60px;
+        height: 60px;
+      }
+      
+      .check-container,
+      .check-icon {
+        width: 20px;
+        height: 20px;
+      }
+    }
   </style>
 </head>
 <body>
-
-  <!-- Intro text -->
-  <section class="sg-support">
-    <div class="intro">
-      <p>Dear SmarterGerman Learner,<br>
-      Your support means the world to me. Running a business is not as simple as just charging money, and your help makes a real difference. Below, you’ll find several ways you can contribute to improving my courses and keeping SmarterGerman alive and growing.<br>
-      Thank you from the bottom of my heart for being such an important part of this journey and for supporting my work.</p>
-    </div>
-
-    <section aria-label="Ways to support SmarterGerman">
-      <div class="grid">
-
-        <!-- 1) Google Review -->
-        <div class="grid-row">
-          <div class="image-container">
-            <img class="grayscale" id="googlereview"
-                 src="images/googlereview.png" width="160" height="160" alt="Google Review">
-          </div>
-          <div class="check-container hide" id="googlereviewcheck">
-            <img class="checkicon" src="images/checkicon.png" alt="Checked">
-          </div>
-          <p>
-            <a href="https://g.page/r/CQJM3OGGTRuFEBM/review" target="_blank" rel="noopener" class="fill-div" onclick="giveColor('googlereview');">
-              <span>Leave a review on Google</span>
-            </a>
-          </p>
-        </div>
-
-        <!-- 2) YouTube Subscribe -->
-        <div class="grid-row">
-          <div class="image-container">
-            <img class="grayscale" id="youtube"
-                 src="images/youtube.png" width="160" height="160" alt="YouTube">
-          </div>
-          <div class="check-container hide" id="youtubecheck">
-            <img class="checkicon" src="images/checkicon.png" alt="Checked">
-          </div>
-          <p>
-            <a href="https://www.youtube.com/c/smarterGermanBerlin?sub_confirmation=1" target="_blank" rel="noopener" class="fill-div" onclick="giveColor('youtube');">
-              <span>Subscribe to SG on YouTube</span>
-            </a>
-          </p>
-        </div>
-
-        <!-- 3) Easy Reader -->
-        <div class="grid-row">
-          <div class="image-container">
-            <img class="grayscale" id="others"
-                 src="images/others.png" width="160" height="160" alt="Easy Reader">
-          </div>
-          <div class="check-container hide" id="otherscheck">
-            <img class="checkicon" src="images/checkicon.png" alt="Checked">
-          </div>
-          <p>
-            <a href="https://smartergerman.com/courses/easy-reader-german-b1-milk/" target="_blank" rel="noopener" class="fill-div" onclick="giveColor('others');">
-              <span>Get one of my Easy Readers</span>
-            </a>
-          </p>
-        </div>
-
-        <!-- 4) Oral Exam Preparation – Deutschgym -->
-        <div class="grid-row">
-          <div class="image-container">
-            <img class="grayscale" id="exampreparation"
-                 src="images/exampreparation_icon.png" width="160" height="160" alt="Oral Exam Preparation">
-          </div>
-          <div class="check-container hide" id="exampreparationcheck">
-            <img class="checkicon" src="images/checkicon.png" alt="Checked">
-          </div>
-          <p>
-            <a href="https://deutschgym.com/?via=michael" target="_blank" rel="noopener" class="fill-div" onclick="giveColor('exampreparation');">
-              <span>Oral Exam Preparation – Deutschgym</span>
-            </a>
-          </p>
-        </div>
-
-        <!-- 5) Friends with benefits (refer-a-friend) -->
-        <div class="grid-row">
-          <div class="image-container">
-            <img class="grayscale" id="fwb"
-                 src="images/fwb.png" width="160" height="160" alt="Refer a Friend">
-          </div>
-          <div class="check-container hide" id="fwbcheck">
-            <img class="checkicon" src="images/checkicon.png" alt="Checked">
-          </div>
-          <p>
-            <a href="https://sso.teachable.com/secure/263787/current_user/refer_a_friend" target="_blank" rel="noopener" class="fill-div" onclick="giveColor('fwb');">
-              <span>Friends with benefits</span>
-            </a>
-          </p>
-        </div>
-
-        <!-- 6) Personal Support Membership (flat PNGs 160x160) -->
-        <div class="grid-row">
-          <div class="image-container">
-            <img class="grayscale" id="supportmember_29"
-                 src="images/psg-icon-inactive-160.png"
-                 data-used-src="images/psg-icon-active-160.png"
-                 width="160" height="160" alt="Personal Support Membership">
-          </div>
-          <div class="check-container hide" id="supportmember_29check">
-            <img class="checkicon" src="images/checkicon.png" alt="Checked">
-          </div>
-          <p>
-            <a href="https://smartergerman.com/memberships/#member" target="_blank" rel="noopener" class="fill-div" onclick="giveColor('supportmember_29');">
-              <span>Personal Support Membership</span>
-            </a>
-          </p>
-        </div>
-
-      </div>
+  <div class="container">
+    <!-- Intro Section -->
+    <section class="intro">
+      <p>
+        Dear SmarterGerman Learner,<br><br>
+        Your support means the world to me. Running a business is not as simple as just charging money, 
+        and your help makes a real difference. Below, you'll find several ways you can contribute to 
+        improving my courses and keeping SmarterGerman alive and growing.<br><br>
+        Thank you from the bottom of my heart for being such an important part of this journey and 
+        for supporting my work.
+      </p>
     </section>
-  </section>
 
-  <script src="public/script.js"></script>
+    <!-- Support Options Grid -->
+    <section class="support-grid" aria-label="Ways to support SmarterGerman">
+      
+      <!-- Google Review -->
+      <div class="support-item" data-item-id="googlereview">
+        <a href="https://g.page/r/CQJM3OGGTRuFEBM/review" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="support-link"
+           data-support-id="googlereview">
+          <div class="image-container">
+            <img src="images/googlereview.png" 
+                 alt="Google Review" 
+                 class="support-icon grayscale"
+                 data-used-src="images/googlereview.png">
+          </div>
+          <div class="check-container">
+            <img src="images/checkicon.png" alt="Completed" class="check-icon">
+          </div>
+          <span class="support-text">Leave a review on Google</span>
+        </a>
+      </div>
+
+      <!-- YouTube Subscribe -->
+      <div class="support-item" data-item-id="youtube">
+        <a href="https://www.youtube.com/c/smarterGermanBerlin?sub_confirmation=1" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="support-link"
+           data-support-id="youtube">
+          <div class="image-container">
+            <img src="images/youtube.png" 
+                 alt="YouTube" 
+                 class="support-icon grayscale"
+                 data-used-src="images/youtube.png">
+          </div>
+          <div class="check-container">
+            <img src="images/checkicon.png" alt="Completed" class="check-icon">
+          </div>
+          <span class="support-text">Subscribe to SG on YouTube</span>
+        </a>
+      </div>
+
+      <!-- Easy Reader -->
+      <div class="support-item" data-item-id="easyreader">
+        <a href="https://smartergerman.com/courses/easy-reader-german-b1-milk/" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="support-link"
+           data-support-id="easyreader">
+          <div class="image-container">
+            <img src="images/others.png" 
+                 alt="Easy Reader" 
+                 class="support-icon grayscale"
+                 data-used-src="images/others.png">
+          </div>
+          <div class="check-container">
+            <img src="images/checkicon.png" alt="Completed" class="check-icon">
+          </div>
+          <span class="support-text">Get one of my Easy Readers</span>
+        </a>
+      </div>
+
+      <!-- Oral Exam Preparation -->
+      <div class="support-item" data-item-id="examprep">
+        <a href="https://deutschgym.com/?via=michael" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="support-link"
+           data-support-id="examprep">
+          <div class="image-container">
+            <img src="images/exampreparation_icon.png" 
+                 alt="Oral Exam Preparation" 
+                 class="support-icon grayscale"
+                 data-used-src="images/exampreparation_icon.png">
+          </div>
+          <div class="check-container">
+            <img src="images/checkicon.png" alt="Completed" class="check-icon">
+          </div>
+          <span class="support-text">Oral Exam Preparation – Deutschgym</span>
+        </a>
+      </div>
+
+      <!-- Refer a Friend -->
+      <div class="support-item" data-item-id="referral">
+        <a href="https://sso.teachable.com/secure/263787/current_user/refer_a_friend" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="support-link"
+           data-support-id="referral">
+          <div class="image-container">
+            <img src="images/fwb.png" 
+                 alt="Refer a Friend" 
+                 class="support-icon grayscale"
+                 data-used-src="images/fwb.png">
+          </div>
+          <div class="check-container">
+            <img src="images/checkicon.png" alt="Completed" class="check-icon">
+          </div>
+          <span class="support-text">Friends with benefits</span>
+        </a>
+      </div>
+
+      <!-- Personal Support Membership -->
+      <div class="support-item" data-item-id="membership">
+        <a href="https://smartergerman.com/memberships/#member" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="support-link"
+           data-support-id="membership">
+          <div class="image-container">
+            <img src="images/psg-icon-inactive.png" 
+                 alt="Personal Support Membership" 
+                 class="support-icon grayscale"
+                 data-used-src="images/psg-icon-active.png">
+          </div>
+          <div class="check-container">
+            <img src="images/checkicon.png" alt="Completed" class="check-icon">
+          </div>
+          <span class="support-text">Personal Support Membership</span>
+        </a>
+      </div>
+
+    </section>
+  </div>
+
   <script>
-    // Swap inactive -> active + show checkmark
-    function giveColor(id) {
-      var img = document.getElementById(id);
-      if (img) {
-        img.classList.remove('grayscale');
-        var used = img.getAttribute('data-used-src');
-        if (used) img.src = used;
+    // Support tracking system with localStorage persistence
+    class SupportTracker {
+      constructor() {
+        this.storageKey = 'sgSupportClicked';
+        this.clickedItems = this.loadState();
+        this.init();
       }
-      var check = document.getElementById(id + 'check');
-      if (check) check.classList.remove('hide');
+
+      // Load saved state from localStorage
+      loadState() {
+        try {
+          return JSON.parse(localStorage.getItem(this.storageKey) || '{}');
+        } catch (e) {
+          console.error('Error loading state:', e);
+          return {};
+        }
+      }
+
+      // Save state to localStorage
+      saveState() {
+        try {
+          localStorage.setItem(this.storageKey, JSON.stringify(this.clickedItems));
+        } catch (e) {
+          console.error('Error saving state:', e);
+        }
+      }
+
+      // Initialize the tracker
+      init() {
+        // Restore previously clicked items
+        this.restoreClickedItems();
+        
+        // Add click listeners
+        this.attachClickListeners();
+      }
+
+      // Restore visual state for previously clicked items
+      restoreClickedItems() {
+        Object.keys(this.clickedItems).forEach(id => {
+          if (this.clickedItems[id]) {
+            this.applyClickedState(id);
+          }
+        });
+      }
+
+      // Attach click listeners to all support links
+      attachClickListeners() {
+        document.querySelectorAll('[data-support-id]').forEach(link => {
+          link.addEventListener('click', (e) => {
+            const id = link.getAttribute('data-support-id');
+            this.markAsClicked(id);
+          });
+        });
+      }
+
+      // Mark an item as clicked
+      markAsClicked(id) {
+        this.clickedItems[id] = true;
+        this.saveState();
+        this.applyClickedState(id);
+      }
+
+      // Apply visual state for clicked items
+      applyClickedState(id) {
+        const item = document.querySelector(`[data-item-id="${id}"]`);
+        if (!item) return;
+
+        // Add visited class to the item
+        item.classList.add('visited');
+
+        // Update icon
+        const icon = item.querySelector('.support-icon');
+        if (icon) {
+          icon.classList.remove('grayscale');
+          
+          // Swap to "used" icon if different
+          const usedSrc = icon.getAttribute('data-used-src');
+          if (usedSrc && usedSrc !== icon.src) {
+            icon.src = usedSrc;
+          }
+        }
+
+        // Show checkmark
+        const checkContainer = item.querySelector('.check-container');
+        if (checkContainer) {
+          checkContainer.classList.add('show');
+        }
+      }
+
+      // Clear all clicked items (utility method)
+      clearAll() {
+        this.clickedItems = {};
+        this.saveState();
+        location.reload();
+      }
+    }
+
+    // Handle image loading errors
+    function handleImageError(img) {
+      const fallback = img.getAttribute('data-fallback');
+      if (fallback) {
+        // Create a placeholder with the fallback text
+        img.style.display = 'none';
+        const placeholder = document.createElement('div');
+        placeholder.className = 'image-placeholder';
+        placeholder.textContent = fallback;
+        img.parentElement.appendChild(placeholder);
+      }
+    }
+
+    // Add error handlers to all images
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.support-icon').forEach(img => {
+        img.onerror = () => handleImageError(img);
+      });
+    });
+
+    // Initialize tracker when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        new SupportTracker();
+      });
+    } else {
+      new SupportTracker();
     }
   </script>
 </body>
